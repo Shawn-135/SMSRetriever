@@ -1,11 +1,15 @@
 package com.myapplicationdev.android.smsretriever;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.PermissionChecker;
 import androidx.fragment.app.Fragment;
 
 import android.text.format.DateFormat;
@@ -32,6 +36,7 @@ public class FirstFragment extends Fragment {
 
        View view =  inflater.inflate(R.layout.fragment_first, container, false);
 
+
         tvFrag1 = view.findViewById(R.id.tvFrag1);
         etFrag1 = view.findViewById(R.id.etFrag1);
         btnF1RetrieveSMS = view.findViewById(R.id.btnF1RetrieveSMS);
@@ -50,7 +55,7 @@ public class FirstFragment extends Fragment {
 
                     ContentResolver cr = getActivity().getContentResolver();
 
-                    String filter="address LIKE ? AND type = ?";
+                    String filter = "address LIKE ? AND type = ?";
 
                     String[] filterArgs = {"%" + number + "%", "1"};
 
@@ -106,4 +111,6 @@ public class FirstFragment extends Fragment {
 
        return view;
     }//end of onCreateView
+
+
 }//end of class

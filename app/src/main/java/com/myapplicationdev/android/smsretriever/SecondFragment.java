@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SecondFragment extends Fragment {
 
@@ -28,44 +29,54 @@ public class SecondFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_second, container, false);
 
-        btnRetrieveSMS.findViewById(R.id.btnRetrieveSMS);
-        tvSMS.findViewById(R.id.tvSMS);
-        etSMS.findViewById(R.id.etSMS);
-        tvFrag2.findViewById(R.id.tvFrag2);
+        btnRetrieveSMS = view.findViewById(R.id.btnRetrieveSMS);
+        tvSMS = view.findViewById(R.id.tvSMS);
+        etSMS = view.findViewById(R.id.etSMS);
+        tvFrag2 = view.findViewById(R.id.tvFrag2);
 
         btnRetrieveSMS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String text = etSMS.getText().toString();
-                Uri uri = Uri.parse("content://sms");
-                String[] reqCols = new String[]{"date", "address", "body", "type"};
+                if(etSMS.getText().toString().trim().length() != 0){
+                    tvSMS.setText("");
+                    String text = etSMS.getText().toString();
+                    String [] textArr = text.split("\\s");
 
-                ContentResolver cr = getActivity().getContentResolver();
+                    for (int i = 0; i < textArr.length; i++){
+                        Uri uri = Uri.parse("content://sms");
+                        String[] reqCols = new String[]{"date", "address", "body", "type"};
 
-                String filter ="body LIKE ?";
-                String[] filterArgs = {"%" + text + "%"};
+                        ContentResolver cr = getActivity().getContentResolver();
 
-                // Fetch SMS Message from Built-in Content Provider
-                Cursor cursor = cr.query(uri, reqCols, filter, filterArgs, null);
-                String smsBody = "";
-                if (cursor.moveToFirst()) {
-                    do {
-                        long dateInMillis = cursor.getLong(0);
-                        String date = (String) DateFormat.format("dd MMM yyyy h:mm:ss aa", dateInMillis);
-                        String address = cursor.getString(1);
-                        String body = cursor.getString(2);
-                        String type = cursor.getString(3);
-                        if (type.equalsIgnoreCase("1")) {
-                            type = "Inbox:";
-                        } else {
-                            type = "Sent:";
+                        String filter ="body LIKE ?";
+                        String[] filterArgs = {"%" + textArr[i] + "%"};
+
+                        Cursor cursor = cr.query(uri, reqCols, filter, filterArgs, null);
+                        String smsBody = "";
+                        if (cursor.moveToFirst()) {
+                            do {
+                                long dateInMillis = cursor.getLong(0);
+                                String date = (String) DateFormat.format("dd MMM yyyy h:mm:ss aa", dateInMillis);
+                                String address = cursor.getString(1);
+                                String body = cursor.getString(2);
+                                String type = cursor.getString(3);
+                                if (type.equalsIgnoreCase("1")) {
+                                    type = "Inbox:";
+                                } else {
+                                    type = "Sent:";
+                                }
+                                smsBody += type + " " + address + "\n at " + date
+                                        + "\n\"" + body + "\"\n\n";
+                            } while (cursor.moveToNext());
                         }
-                        smsBody += type + " " + address + "\n at " + date
-                                + "\n\"" + body + "\"\n\n";
-                    } while (cursor.moveToNext());
-                }
-                tvSMS.setText(smsBody);
+                        tvSMS.append(smsBody);
+                    }//end of for loop
+
+                }//end of if
+                else{
+                    Toast.makeText(getActivity(), "Please enter a word", Toast.LENGTH_LONG).show();
+                }//end of text field validation
 
             }
         });
