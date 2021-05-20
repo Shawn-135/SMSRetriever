@@ -7,21 +7,5 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Only SMS containing this number" />
-
-    <EditText
-        android:id="@+id/eTNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/btnRetrieveSMS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="retrieve sms"/>
 
 </LinearLayout>
