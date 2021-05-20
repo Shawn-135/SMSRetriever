@@ -19,17 +19,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        int permissionCheck = PermissionChecker.checkSelfPermission
-                (MainActivity.this, Manifest.permission.READ_SMS);
-
-        if (permissionCheck != PermissionChecker.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.READ_SMS}, 0);
-            // stops the action from proceeding further as permission not
-            //  granted yet
-            return;
-        }
-
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -43,29 +32,6 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }//end of onCreate
 
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-
-        switch (requestCode) {
-            case 0: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    // permission was granted, yay! Do the read SMS
-                    //  as if the btnRetrieve is clicked
-
-
-                } else {
-                    // permission denied... notify user
-                    Toast.makeText(MainActivity.this, "Permission not granted",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-    }
 
 
 

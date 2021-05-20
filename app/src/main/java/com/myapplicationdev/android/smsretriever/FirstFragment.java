@@ -36,6 +36,16 @@ public class FirstFragment extends Fragment {
 
        View view =  inflater.inflate(R.layout.fragment_first, container, false);
 
+        int permissionCheck = PermissionChecker.checkSelfPermission
+                (getActivity(), Manifest.permission.READ_SMS);
+
+        if (permissionCheck != PermissionChecker.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.READ_SMS}, 0);
+
+        }
+
+
 
         tvFrag1 = view.findViewById(R.id.tvFrag1);
         etFrag1 = view.findViewById(R.id.etFrag1);
@@ -111,6 +121,26 @@ public class FirstFragment extends Fragment {
 
        return view;
     }//end of onCreateView
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+
+        switch (requestCode) {
+            case 0: {
+
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+
+                } else {
+
+                    Toast.makeText(getActivity(), "Permission not granted",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
 
 
 }//end of class
