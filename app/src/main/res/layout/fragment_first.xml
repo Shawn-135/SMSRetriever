@@ -3,41 +3,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#BBFFFF"
+    android:orientation="vertical"
     tools:context=".FirstFragment">
-
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Only SMS containing this number" />
-
-    <EditText
-        android:id="@+id/etFrag1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/btnF1RetrieveSMS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/RetrieveSMS"/>
-
-    <Button
-        android:id="@+id/btnEmailSMS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/EmailSMS"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Only SMS containing this number" />
+
+            <EditText
+                android:id="@+id/etFrag1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnF1RetrieveSMS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/RetrieveSMS" />
+
+            <Button
+                android:id="@+id/btnEmailSMS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/EmailSMS" />
+
 
             <TextView
                 android:id="@+id/tvFrag1"
