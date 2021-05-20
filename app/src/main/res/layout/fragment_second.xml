@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00FFDB"
+    android:background="#FFDBDB"
     android:orientation="vertical"
     tools:context=".SecondFragment">
 
@@ -26,5 +26,5 @@
         android:layout_height="wrap_content"
         android:text="Button" />
 
-    
+
 </LinearLayout>
