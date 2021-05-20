@@ -52,7 +52,7 @@ public class FirstFragment extends Fragment {
 
                     String filter="address LIKE ? AND type = ?";
 
-                    String[] filterArgs = {number, "1"};
+                    String[] filterArgs = {"%" + number + "%", "1"};
 
                     Cursor cursor = cr.query(uri, reqCols, filter, filterArgs, null);
                     String smsBody = "";
